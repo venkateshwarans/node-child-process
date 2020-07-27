@@ -5,6 +5,7 @@ process.on('message', msg => {
   // process.send(counter)
   const sum = longComputation();
   process.send({name: msg.name, sum, date: new Date()})
+  process.exit()
 })
 
 
