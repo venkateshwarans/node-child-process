@@ -1,12 +1,12 @@
 const { fork } = require("child_process");
 const incrementor = fork('./process/incrementor.js');
 
-function getMessage() {
-	return( Promise.resolve( "Come at me, bro!" ) );
+function getMessage(name) {
+	return( Promise.resolve(name) );
 }
 
-function enqueueSomething() {
-  startChild()
+function enqueueSomething(name) {
+  startChild(name)
 	return;
 }
 
@@ -14,11 +14,18 @@ function sendSomething() {
 	throw( new Error( "SendFailure" ) );
 }
 
-function startChild() {
+function startChild(name) {
+
+  incrementor.send({
+    message: "INIT",
+    name,
+    counterValue: 0
+   });
+
   incrementor.on("message", msg => {
     console.log("Message from child", msg);
+    return
   });
-  incrementor.send({ hello: "world" });
 }
 
 module.exports.getMessage = getMessage;

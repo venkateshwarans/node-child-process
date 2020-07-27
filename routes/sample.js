@@ -7,8 +7,9 @@ module.exports = (app) => {
     setTimeout(() => response.send("ok"), 0);
   })
 
-  app.get("/message",  (request, response, next) => {
-    sampleService.getMessage()
+  app.post("/message",  (request, response, next) => {
+    const data = request.body
+    sampleService.getMessage(data.name)
       .then(
         (message) => {
           // Close the client response.
@@ -24,7 +25,7 @@ module.exports = (app) => {
       // CAUTION: Since we're serializing the calls, essentially, it means that an
       // error in one will likely prevent the next one from being invoked. As such,
       // this approach may not always be appropriate.
-      .then(sampleService.enqueueSomething)
+      .then(sampleService.enqueueSomething(data.name))
       // If we hook all of this into the next() callback, it means that all of our
       // errors can be handled by the global error handler - even errors that occur
       // after the response has been sent to the client.

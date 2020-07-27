@@ -2,8 +2,11 @@ const express = require('express');
 const chalk = require('chalk');
 const app = express();
 const port = 1001;
+const bodyParser = require('body-parser');
 
 app.use(express.static(__dirname));
+app.use(bodyParser.json({ limit: '1mb' }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 require('./routes/sample')(app)
 
