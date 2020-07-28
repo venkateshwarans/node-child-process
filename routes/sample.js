@@ -26,6 +26,7 @@ module.exports = (app) => {
       // error in one will likely prevent the next one from being invoked. As such,
       // this approach may not always be appropriate.
       .then(sampleService.enqueueSomething(data.name))
+      .then(sampleService.sendSomething)
       // If we hook all of this into the next() callback, it means that all of our
       // errors can be handled by the global error handler - even errors that occur
       // after the response has been sent to the client.
