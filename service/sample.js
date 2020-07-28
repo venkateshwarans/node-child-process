@@ -1,5 +1,4 @@
 const { fork } = require("child_process");
-const incrementor = fork('./process/incrementor.js');
 
 function getMessage() {
 	return( Promise.resolve( "Come at me, bro!" ) );
@@ -15,6 +14,8 @@ function sendSomething() {
 }
 
 function startChild() {
+  const incrementor = fork('./process/incrementor.js');
+
   incrementor.on("message", msg => {
     console.log("Message from child", msg);
   });

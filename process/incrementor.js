@@ -10,7 +10,7 @@ function init() {
   setInterval(() => {
     if(counter <= 20) {
       process.send({ counter: counter++ });
-    }else {
+    } else {
       process.exit(1);
     }
   }, 1000)
